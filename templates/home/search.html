@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Search Results {% endblock title %}
+{% block blogactive %} active{% endblock blogactive %} 
+{% block body %}
+
+<div class="container my-4">
+<h2>Search Results by iCoder:</h2>
+<hr>
+{% for post in allPosts %}
+    <div class="col-md-6">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success">Article by {{post.author}}</strong>
+          <h3 class="mb-0">{{post.title}}</h3>
+          <div class="mb-1 text-muted">{{post.timeStamp}}</div>
+          <p class="mb-auto">{{post.content|slice:"0:100"}}...</p>
+          <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+{% if allPosts|length < 1 %}
+<div class="container">
+<h3>Your Search Query - <u>{{query}}</u> did not match any of our Blogs here at iCoder.</h3>
+<h4><u>Suggestions</u>: Try Using another Search Query.</h4>
+</div>
+{% endif %}
+
+</div>
+
+{% endblock body %}
+
+{% block script %}
+<script>
+search = document.getElementById('query')
+search.value = '{{query}}'
+</script>
+{% endblock script %}
