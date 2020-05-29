@@ -6,11 +6,13 @@ from blog.templatetags import extras
 # Create your views here.
 def blogHome(request):
     allPosts = Post.objects.all()
-    params={'allPosts':allPosts}
+    params={'allPosts':topPosts}
     return render(request,'blog/blogHome.html',params)
 
 def blogPost(request,slug):
     post = Post.objects.filter(slug=slug).first()
+    post.views = post.views +1
+    post.save()
     comments = BlogComment.objects.filter(post=post,parent=None)
     replies = BlogComment.objects.filter(post=post).exclude(parent=None)
     replyDict={}

@@ -27,9 +27,10 @@
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success">Article by {{post.author}}</strong>
           <h3 class="mb-0">{{post.title}}</h3>
+          <span class="badge badge-secondary">{{post.views}} views</span>
           <div class="mb-1 text-muted">{{post.timeStamp}}</div>
           <div class="preview">
-          <p class="mb-auto">{{post.content|safe|slice:"0:100"}}...</p>
+          <p class="mb-auto">{{post.content|safe|slice:"0:50"}}...</p>
           </div>
           <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
         </div>
